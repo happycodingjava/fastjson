@@ -1,13 +1,7 @@
 language: java
 jdk:
   - openjdk8
-before_install:
-  - pip install --user codecov
 script:
-  - mvn test -Dsurefire.runOrder=alphabetical
+  - mvn test -Dsurefire.runOrder=reversealphabetical
   - mvn test -Dsurefire.runOrder=random
-after_success:
-  - codecov
-branches:
-  except:
-    - appveyor
+
