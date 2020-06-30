@@ -454,7 +454,7 @@ public class TypeUtils{
                 strVal = strVal.substring(6, strVal.length() - 2);
             }
 
-            if (strVal.indexOf('-') > 0 || strVal.indexOf('+') > 0) {
+            if (strVal.indexOf('-') > 0 || strVal.indexOf('+') > 0 || format != null) {
                 if (format == null) {
                     if (strVal.length() == JSON.DEFFAULT_DATE_FORMAT.length()
                             || (strVal.length() == 22 && JSON.DEFFAULT_DATE_FORMAT.equals("yyyyMMddHHmmssSSSZ"))) {
@@ -3083,8 +3083,9 @@ public class TypeUtils{
 
         if(mixInClass != null) {
             A mixInAnnotation = mixInClass.getAnnotation(annotationClass);
-            if(mixInAnnotation == null && mixInClass.getAnnotations().length > 0){
-                for(Annotation annotation : mixInClass.getAnnotations()){
+            Annotation[] annotations = mixInClass.getAnnotations();
+            if(mixInAnnotation == null && annotations.length > 0){
+                for(Annotation annotation : annotations){
                     mixInAnnotation = annotation.annotationType().getAnnotation(annotationClass);
                     if(mixInAnnotation != null){
                         break;
@@ -3096,8 +3097,9 @@ public class TypeUtils{
             }
         }
 
-        if(targetAnnotation == null && targetClass.getAnnotations().length > 0){
-            for(Annotation annotation : targetClass.getAnnotations()){
+        Annotation[] targetClassAnnotations = targetClass.getAnnotations();
+        if(targetAnnotation == null && targetClassAnnotations.length > 0){
+            for(Annotation annotation : targetClassAnnotations){
                 targetAnnotation = annotation.annotationType().getAnnotation(annotationClass);
                 if(targetAnnotation != null){
                     break;
